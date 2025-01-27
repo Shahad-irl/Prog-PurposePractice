@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class ShannonEntropy {
+    public static void main(String[] args) {
+        int m = Integer.parseInt(args[0]);
+        Scanner scanner = new Scanner(System.in);
+
+        int[] frequencies = new int[m + 1];
+        int total = 0;
+
+        // Count frequencies
+        while (scanner.hasNextInt()) {
+            int value = scanner.nextInt();
+            frequencies[value]++;
+            total++;
+        }
+
+        double entropy = 0.0;
+
+        // Calculate Shannon entropy
+        for (int i = 1; i <= m; i++) {
+            if (frequencies[i] > 0) {
+                double p = (double) frequencies[i] / total;
+                entropy -= p * (Math.log(p) / Math.log(2));
+            }
+        }
+
+        System.out.printf("%.4f\n", entropy);
+    }
+}
